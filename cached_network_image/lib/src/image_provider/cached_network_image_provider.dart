@@ -75,7 +75,7 @@ class CachedNetworkImageProvider
       'load is deprecated, use loadBuffer instead, see https://docs.flutter.dev/release/breaking-changes/image-provider-load-buffer')
   @override
   ImageStreamCompleter load(
-      image_provider.CachedNetworkImageProvider key, DecoderCallback decode) {
+      image_provider.CachedNetworkImageProvider key, ImageDecoderCallback decode) {
     final chunkEvents = StreamController<ImageChunkEvent>();
     return MultiImageStreamCompleter(
       codec: _loadAsync(key, chunkEvents, decode),
@@ -96,7 +96,7 @@ class CachedNetworkImageProvider
   Stream<ui.Codec> _loadAsync(
     image_provider.CachedNetworkImageProvider key,
     StreamController<ImageChunkEvent> chunkEvents,
-    DecoderCallback decode,
+    ImageDecoderCallback decode,
   ) {
     assert(key == this);
     return ImageLoader().loadAsync(
